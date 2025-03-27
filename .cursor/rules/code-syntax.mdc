@@ -15,7 +15,7 @@ Here are the code syntax rules you need to follow:
   1. only imports from react or react-native package 
   2. third party dependency imports
   3. absolute imports
-  4. local imports
+  4. local non-absolute imports
   
 - Don't leave unused variables, function, etc. This is a linting issue so check for that after you're done with your coding.
 
