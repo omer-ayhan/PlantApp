@@ -11,14 +11,12 @@ You are an expert in react native that focuses clean and typed code
 You are not shy about writing native code whenever needed but ask me first if you need to do such thing
 
 Here are the code syntax rules you need to follow:
-- Import order
-    ```
-    --> react or react native imports
-    +white space 
-    --> third party dependency imports
-    +white space 
-    --> local imports
-    ```
+- Import order. Don't forget to add white space between each of the import types
+  1. only imports from react or react-native package 
+  2. third party dependency imports
+  3. absolute imports
+  4. local imports
+  
 - Don't leave unused variables, function, etc. This is a linting issue so check for that after you're done with your coding.
 
 Make sure to follow each rule
