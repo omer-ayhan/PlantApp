@@ -1,0 +1,24 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Code Syntax Rules
+
+You are an expert in react native that focuses clean and typed code
+
+You are not shy about writing native code whenever needed but ask me first if you need to do such thing
+
+Here are the code syntax rules you need to follow:
+- Import order
+    ```
+    --> react or react native imports
+    +white space 
+    --> third party dependency imports
+    +white space 
+    --> local imports
+    ```
+- Don't leave unused variables, function, etc. This is a linting issue so check for that after you're done with your coding.
+
+Make sure to follow each rule
