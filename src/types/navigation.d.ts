@@ -7,8 +7,8 @@ declare global {
 
   type RootStackParamList = {
     OnboardingStack: NavigatorScreenParams<OnboardingStackParamList>;
-    PaywallStack: NavigatorScreenParams<PaywallStackParamList>;
     MainTabs: NavigatorScreenParams<MainTabsParamList>;
+    Paywall: undefined;
     Scan: undefined;
     Chat: undefined;
   };
@@ -16,10 +16,6 @@ declare global {
   type OnboardingStackParamList = {
     OnboardingWelcome: undefined;
     OnboardingInfo: undefined;
-  };
-
-  type PaywallStackParamList = {
-    Paywall: undefined;
   };
 
   type MainTabsParamList = {

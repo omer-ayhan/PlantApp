@@ -13,7 +13,7 @@ const OnboardingInfo = () => {
     navigation.dispatch(
       CommonActions.reset({
         index: 0,
-        routes: [{name: ROUTES.PAYWALL_STACK}],
+        routes: [{name: ROUTES.PAYWALL}],
       }),
     );
   };
