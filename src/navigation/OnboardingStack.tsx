@@ -2,9 +2,9 @@ import React from 'react';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import OnboardingWelcome from '@screens/onboarding/OnboardingWelcome';
-import OnboardingInfo from '@screens/onboarding/OnboardingInfo';
-import ROUTES from '@constants/routes';
+import OnboardingWelcome from '@app/screens/onboarding/OnboardingWelcome';
+import OnboardingInfo from '@app/screens/onboarding/OnboardingInfo';
+import ROUTES from '@app/constants/routes';
 
 const Stack = createNativeStackNavigator<OnboardingStackParamList>();
 

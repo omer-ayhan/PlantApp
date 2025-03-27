@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-import useAppNavigation from '@hooks/useAppNavigation';
-import ROUTES from '@constants/routes';
+import useAppNavigation from '@app/hooks/useAppNavigation';
+import ROUTES from '@app/constants/routes';
 
 const OnboardingWelcome = () => {
   const navigation = useAppNavigation();

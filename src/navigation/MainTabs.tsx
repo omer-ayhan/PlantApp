@@ -2,11 +2,11 @@ import React from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import Home from '@screens/home/Home';
-import Diagnose from '@screens/home/Diagnose';
-import MyGarden from '@screens/home/MyGarden';
-import Profile from '@screens/home/Profile';
-import ROUTES from '@constants/routes';
+import Home from '@app/screens/home/Home';
+import Diagnose from '@app/screens/home/Diagnose';
+import MyGarden from '@app/screens/home/MyGarden';
+import Profile from '@app/screens/home/Profile';
+import ROUTES from '@app/constants/routes';
 
 const Tab = createBottomTabNavigator<MainTabsParamList>();
 

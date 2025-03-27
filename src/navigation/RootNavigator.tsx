@@ -2,12 +2,12 @@ import React from 'react';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import OnboardingStack from '@navigation/OnboardingStack';
-import MainTabs from '@navigation/MainTabs';
-import Scan from '@screens/scan/Scan';
-import Chat from '@screens/chat/Chat';
-import Paywall from '@screens/paywall/Paywall';
-import ROUTES from '@constants/routes';
+import OnboardingStack from '@app/navigation/OnboardingStack';
+import MainTabs from '@app/navigation/MainTabs';
+import Scan from '@app/screens/scan/Scan';
+import Chat from '@app/screens/chat/Chat';
+import Paywall from '@app/screens/paywall/Paywall';
+import ROUTES from '@app/constants/routes';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-import useAppNavigation from '@hooks/useAppNavigation';
+import useAppNavigation from '@app/hooks/useAppNavigation';
 
 const Scan = () => {
   const navigation = useAppNavigation();

@@ -3,14 +3,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@navigation/*": ["src/navigation/*"],
-      "@screens/*": ["src/screens/*"],
-      "@components/*": ["src/components/*"],
-      "@types/*": ["src/types/*"],
-      "@constants/*": ["src/constants/*"],
-      "@assets/*": ["src/assets/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@styles/*": ["src/styles/*"]
+      "@app/navigation/*": ["src/navigation/*"],
+      "@app/screens/*": ["src/screens/*"],
+      "@app/components/*": ["src/components/*"],
+      "@app/types/*": ["src/types/*"],
+      "@app/constants/*": ["src/constants/*"],
+      "@app/assets/*": ["src/assets/*"],
+      "@app/hooks/*": ["src/hooks/*"],
+      "@app/styles/*": ["src/styles/*"]
     }
   },
   "include": ["src/**/*", "src/types/*.d.ts"]
