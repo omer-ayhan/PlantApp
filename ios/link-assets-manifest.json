@@ -26,8 +26,16 @@
       "sha1": "632e6cea171b276e5dd1f13b152c702fbf562cee"
     },
     {
+      "path": "src/assets/fonts/SFProText/SFProText-Light.ttf",
+      "sha1": "ecc8da32c2eac6044c807e945375180b7cda3a20"
+    },
+    {
       "path": "src/assets/fonts/SFProText/SFProText-Medium.ttf",
       "sha1": "3b8df618cd23e83843b16a8a32de1ddc9de44df4"
+    },
+    {
+      "path": "src/assets/fonts/SFProText/SFProText-Regular.ttf",
+      "sha1": "b4893462f2289df6978f9462a63db9e64bcc9342"
     },
     {
       "path": "src/assets/fonts/SFProText/SFProText-Semibold.ttf",
