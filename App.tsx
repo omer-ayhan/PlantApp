@@ -4,14 +4,14 @@ import {StatusBar, StyleSheet} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 
-import RootNavigator from './src/navigation/RootNavigator';
-import {navigationRef} from './src/hooks/useAppNavigation';
+import navigation from '@app/lib/navigation';
+import RootNavigator from '@app/navigation/RootNavigator';
 
 function App(): React.JSX.Element {
   return (
     <GestureHandlerRootView style={styles.gestureHandlerRootView}>
       <StatusBar barStyle="dark-content" />
-      <NavigationContainer ref={navigationRef}>
+      <NavigationContainer ref={navigation.navigationRef}>
         <RootNavigator />
       </NavigationContainer>
     </GestureHandlerRootView>
