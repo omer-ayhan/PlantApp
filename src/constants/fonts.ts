@@ -1,16 +1,26 @@
-const FONTS = {
-  RUBIK: {
-    LIGHT: 'Rubik-Light',
-    REGULAR: 'Rubik-Regular',
-    MEDIUM: 'Rubik-Medium',
-    SEMIBOLD: 'Rubik-SemiBold',
-    BOLD: 'Rubik-Bold',
+type FontVariantType = {
+  [key in FontFamily]: {
+    [key in FontWeight]: string;
+  };
+};
+
+const fonts: FontVariantType = {
+  rubik: {
+    light: 'Rubik-Light',
+    regular: 'Rubik-Regular',
+    medium: 'Rubik-Medium',
+    semibold: 'Rubik-SemiBold',
+    bold: 'Rubik-Bold',
+    extraBold: 'Rubik-ExtraBold',
   },
-  SF_PRO: {
-    MEDIUM: 'SFProText-Medium',
-    SEMIBOLD: 'SFProText-Semibold',
-    BOLD: 'SFProText-Bold',
+  sfPro: {
+    light: 'SFProText-Light',
+    regular: 'SFProText-Regular',
+    medium: 'SFProText-Medium',
+    semibold: 'SFProText-Semibold',
+    bold: 'SFProText-Bold',
+    extraBold: 'SFProText-Bold',
   },
 };
 
-export default FONTS;
+export default fonts;
