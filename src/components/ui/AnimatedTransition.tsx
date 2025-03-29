@@ -1,13 +1,21 @@
 import {ReactNode} from 'react';
 import {StyleProp, ViewStyle} from 'react-native';
+
 import Animated, {
-  Extrapolation,
-  interpolate,
-  SharedValue,
-  useAnimatedStyle,
+  AnimatedStyle,
+  FadeIn,
+  FadeInDown,
+  FadeInLeft,
+  FadeInRight,
+  FadeInUp,
+  FadeOut,
+  FadeOutDown,
+  FadeOutLeft,
+  FadeOutRight,
+  FadeOutUp,
+  LinearTransition,
 } from 'react-native-reanimated';
 
-// Animation types
 type AnimationType =
   | 'fadeBottomToTop'
   | 'fadeTopToBottom'
@@ -15,232 +23,88 @@ type AnimationType =
   | 'fadeRightToLeft'
   | 'fade';
 
-// Props for the AnimatedTransition component
 type AnimatedTransitionProps = {
-  style?: StyleProp<ViewStyle>;
-  children: ReactNode;
-  animationProgress: SharedValue<number>;
+  style?: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
   transitionType?: AnimationType;
   isActive: boolean;
+  enteringChild: ReactNode;
+  exitingChild: ReactNode;
+  delay?: {
+    entering: number;
+    exiting: number;
+  };
+  duration?: {
+    entering: number;
+    exiting: number;
+  };
 };
 
-// Reusable component for animated transitions
 const AnimatedTransition = ({
-  children,
-  animationProgress,
   transitionType = 'fadeBottomToTop',
   isActive,
+  enteringChild,
+  exitingChild,
   style,
+  delay = {
+    entering: 0,
+    exiting: 0,
+  },
+  duration = {
+    entering: 500,
+    exiting: 500,
+  },
 }: AnimatedTransitionProps) => {
-  // Animation for bottom to top
-  const bottomToTopStyle = useAnimatedStyle(() => {
-    return {
-      opacity: isActive
-        ? interpolate(
-            animationProgress.value,
-            [0, 0.5],
-            [1, 0],
-            Extrapolation.CLAMP,
-          )
-        : interpolate(
-            animationProgress.value,
-            [0.5, 1],
-            [0, 1],
-            Extrapolation.CLAMP,
-          ),
-      transform: [
-        {
-          translateY: isActive
-            ? interpolate(
-                animationProgress.value,
-                [0, 0.5],
-                [0, -20],
-                Extrapolation.CLAMP,
-              )
-            : interpolate(
-                animationProgress.value,
-                [0.5, 1],
-                [20, 0],
-                Extrapolation.CLAMP,
-              ),
-        },
-      ],
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-    };
-  });
-
-  // Animation for top to bottom
-  const topToBottomStyle = useAnimatedStyle(() => {
-    return {
-      opacity: isActive
-        ? interpolate(
-            animationProgress.value,
-            [0, 0.5],
-            [1, 0],
-            Extrapolation.CLAMP,
-          )
-        : interpolate(
-            animationProgress.value,
-            [0.5, 1],
-            [0, 1],
-            Extrapolation.CLAMP,
-          ),
-      transform: [
-        {
-          translateY: isActive
-            ? interpolate(
-                animationProgress.value,
-                [0, 0.5],
-                [0, 20],
-                Extrapolation.CLAMP,
-              )
-            : interpolate(
-                animationProgress.value,
-                [0.5, 1],
-                [-20, 0],
-                Extrapolation.CLAMP,
-              ),
-        },
-      ],
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-    };
-  });
-
-  // Animation for left to right
-  const leftToRightStyle = useAnimatedStyle(() => {
-    return {
-      opacity: isActive
-        ? interpolate(
-            animationProgress.value,
-            [0, 0.5],
-            [1, 0],
-            Extrapolation.CLAMP,
-          )
-        : interpolate(
-            animationProgress.value,
-            [0.5, 1],
-            [0, 1],
-            Extrapolation.CLAMP,
-          ),
-      transform: [
-        {
-          translateX: isActive
-            ? interpolate(
-                animationProgress.value,
-                [0, 0.5],
-                [0, 20],
-                Extrapolation.CLAMP,
-              )
-            : interpolate(
-                animationProgress.value,
-                [0.5, 1],
-                [-20, 0],
-                Extrapolation.CLAMP,
-              ),
-        },
-      ],
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-    };
-  });
-
-  // Animation for right to left
-  const rightToLeftStyle = useAnimatedStyle(() => {
-    return {
-      opacity: isActive
-        ? interpolate(
-            animationProgress.value,
-            [0, 0.5],
-            [1, 0],
-            Extrapolation.CLAMP,
-          )
-        : interpolate(
-            animationProgress.value,
-            [0.5, 1],
-            [0, 1],
-            Extrapolation.CLAMP,
-          ),
-      transform: [
-        {
-          translateX: isActive
-            ? interpolate(
-                animationProgress.value,
-                [0, 0.5],
-                [0, -20],
-                Extrapolation.CLAMP,
-              )
-            : interpolate(
-                animationProgress.value,
-                [0.5, 1],
-                [20, 0],
-                Extrapolation.CLAMP,
-              ),
-        },
-      ],
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-    };
-  });
-
-  // Simple fade animation
-  const fadeStyle = useAnimatedStyle(() => {
-    return {
-      opacity: isActive
-        ? interpolate(
-            animationProgress.value,
-            [0, 0.5],
-            [1, 0],
-            Extrapolation.CLAMP,
-          )
-        : interpolate(
-            animationProgress.value,
-            [0.5, 1],
-            [0, 1],
-            Extrapolation.CLAMP,
-          ),
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-    };
-  });
-
-  // Select the appropriate animation style based on transition type
-  const getAnimationStyle = () => {
-    switch (transitionType) {
-      case 'fadeBottomToTop':
-        return bottomToTopStyle;
-      case 'fadeTopToBottom':
-        return topToBottomStyle;
-      case 'fadeLeftToRight':
-        return leftToRightStyle;
-      case 'fadeRightToLeft':
-        return rightToLeftStyle;
-      case 'fade':
-        return fadeStyle;
-      default:
-        return bottomToTopStyle;
-    }
+  const transitionTypeAnimations = {
+    fadeBottomToTop: {
+      entering: FadeInDown,
+      exiting: FadeOutUp,
+    },
+    fadeTopToBottom: {
+      entering: FadeInUp,
+      exiting: FadeOutDown,
+    },
+    fadeLeftToRight: {
+      entering: FadeInRight,
+      exiting: FadeOutLeft,
+    },
+    fadeRightToLeft: {
+      entering: FadeInLeft,
+      exiting: FadeOutRight,
+    },
+    fade: {
+      entering: FadeIn,
+      exiting: FadeOut,
+    },
   };
+  const selectedAnimation = transitionTypeAnimations[transitionType];
 
-  return (
-    <Animated.View style={[getAnimationStyle(), style]}>
-      {children}
+  return isActive ? (
+    <Animated.View
+      style={style}
+      key="enteringChild"
+      entering={selectedAnimation.entering
+        .duration(duration.entering)
+        .delay(delay.entering)}
+      exiting={selectedAnimation.exiting
+        .duration(duration.exiting)
+        .delay(delay.exiting)}
+      layout={LinearTransition.duration(duration.entering).delay(
+        delay.entering,
+      )}>
+      {enteringChild}
+    </Animated.View>
+  ) : (
+    <Animated.View
+      style={style}
+      key="exitingChild"
+      entering={selectedAnimation.entering
+        .duration(duration.entering)
+        .delay(delay.entering)}
+      exiting={selectedAnimation.exiting
+        .duration(duration.exiting)
+        .delay(delay.exiting)}
+      layout={LinearTransition.duration(duration.exiting).delay(delay.exiting)}>
+      {exitingChild}
     </Animated.View>
   );
 };
