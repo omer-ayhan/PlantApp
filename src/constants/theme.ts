@@ -1,87 +1,101 @@
-import FONTS from './fonts';
+import fonts from './fonts';
+import {scale} from 'react-native-size-matters';
 
-const rubikTypography = {
+type TypographyVariantType = {
+  [key in TypographyVariantNames]?: {
+    fontFamily: string;
+    fontSize: number;
+    lineHeight: number;
+  };
+};
+
+const rubikTypography: TypographyVariantType = {
+  title: {
+    fontFamily: fonts.rubik.bold,
+    fontSize: scale(28),
+    lineHeight: 32,
+  },
   h1: {
-    fontFamily: FONTS.RUBIK.BOLD,
-    fontSize: 24,
+    fontFamily: fonts.rubik.bold,
+    fontSize: scale(24),
     lineHeight: 32,
   },
   h2: {
-    fontFamily: FONTS.RUBIK.BOLD,
-    fontSize: 20,
+    fontFamily: fonts.rubik.bold,
+    fontSize: scale(20),
     lineHeight: 28,
   },
   h3: {
-    fontFamily: FONTS.RUBIK.MEDIUM,
-    fontSize: 18,
+    fontFamily: fonts.rubik.medium,
+    fontSize: scale(18),
     lineHeight: 26,
   },
   subtitle1: {
-    fontFamily: FONTS.RUBIK.MEDIUM,
-    fontSize: 16,
+    fontFamily: fonts.rubik.medium,
+    fontSize: scale(16),
     lineHeight: 24,
   },
   subtitle2: {
-    fontFamily: FONTS.RUBIK.MEDIUM,
-    fontSize: 14,
+    fontFamily: fonts.rubik.medium,
+    fontSize: scale(14),
     lineHeight: 22,
   },
   body1: {
-    fontFamily: FONTS.RUBIK.REGULAR,
-    fontSize: 16,
-    lineHeight: 24,
+    fontFamily: fonts.rubik.regular,
+    fontSize: scale(16),
+    lineHeight: 22,
   },
   body2: {
-    fontFamily: FONTS.RUBIK.REGULAR,
-    fontSize: 14,
+    fontFamily: fonts.rubik.regular,
+    fontSize: scale(14),
     lineHeight: 22,
   },
   caption: {
-    fontFamily: FONTS.RUBIK.LIGHT,
-    fontSize: 12,
+    fontFamily: fonts.rubik.light,
+    fontSize: scale(12),
     lineHeight: 18,
   },
 };
 
-const sfTypography = {
+const sfTypography: TypographyVariantType = {
   h1: {
-    fontFamily: FONTS.SF_PRO.BOLD,
-    fontSize: 24,
+    fontFamily: fonts.sfPro.bold,
+    fontSize: scale(24),
     lineHeight: 32,
   },
   h2: {
-    fontFamily: FONTS.SF_PRO.BOLD,
-    fontSize: 20,
+    fontFamily: fonts.sfPro.bold,
+    fontSize: scale(20),
     lineHeight: 28,
   },
   h3: {
-    fontFamily: FONTS.SF_PRO.SEMIBOLD,
-    fontSize: 18,
+    fontFamily: fonts.sfPro.semibold,
+    fontSize: scale(18),
     lineHeight: 26,
   },
   subtitle1: {
-    fontFamily: FONTS.SF_PRO.SEMIBOLD,
-    fontSize: 16,
+    fontFamily: fonts.sfPro.semibold,
+    fontSize: scale(16),
     lineHeight: 24,
   },
   subtitle2: {
-    fontFamily: FONTS.SF_PRO.MEDIUM,
-    fontSize: 14,
+    fontFamily: fonts.sfPro.medium,
+    fontSize: scale(14),
     lineHeight: 22,
   },
   body1: {
-    fontFamily: FONTS.SF_PRO.MEDIUM,
-    fontSize: 16,
+    fontFamily: fonts.sfPro.regular,
+    fontSize: scale(16),
     lineHeight: 24,
   },
   body2: {
-    fontFamily: FONTS.SF_PRO.MEDIUM,
-    fontSize: 14,
+    fontFamily: fonts.sfPro.regular,
+    fontSize: scale(14),
     lineHeight: 22,
   },
   caption: {
-    fontFamily: FONTS.SF_PRO.MEDIUM,
-    fontSize: 12,
+    fontFamily: fonts.sfPro.light,
+    fontSize: scale(12),
     lineHeight: 18,
   },
 };
@@ -91,6 +105,7 @@ const colors = {
   dark: '#13231B',
   green_dark: '#597165B2',
   gray: '#BDBDBD',
+  white: '#FFFFFF',
 };
 
 const theme = {
