@@ -4,7 +4,7 @@ import {Text as RNText, TextProps as RNTextProps} from 'react-native';
 import theme from '@app/constants/theme';
 import fonts from '@app/constants/fonts';
 
-interface TextProps extends RNTextProps {
+interface StyledTextProps extends RNTextProps {
   variant?: TypographyVariantNames;
   fontFamily?: FontFamily;
   weight?: FontWeight;
@@ -20,7 +20,7 @@ const StyledText = ({
   style,
   children,
   ...rest
-}: TextProps) => {
+}: StyledTextProps) => {
   const typographyTypes = {
     rubik: theme.rubikTypography,
     sfPro: theme.sfTypography,
@@ -32,7 +32,7 @@ const StyledText = ({
       }
     : {};
   const colorStyle = {
-    color: theme.colors[color],
+    color: theme.colors[color] || color,
   };
 
   return (
