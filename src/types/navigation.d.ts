@@ -28,11 +28,9 @@ declare global {
   type NavigationRouteNames =
     | keyof RootStackParamList
     | keyof OnboardingStackParamList
-    | keyof PaywallStackParamList
     | keyof MainTabsParamList;
 
   type AllNavigationRoutes = RootStackParamList &
     OnboardingStackParamList &
-    PaywallStackParamList &
     MainTabsParamList;
 }
