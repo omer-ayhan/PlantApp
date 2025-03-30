@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, ImageBackground, Dimensions} from 'react-native';
+import {View, StyleSheet, ImageBackground} from 'react-native';
 
 import FastImage from 'react-native-fast-image';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -9,6 +9,7 @@ import AnimatedTransition from '@app/components/ui/AnimatedTransition';
 import StyledButton from '@app/components/ui/StyledButton';
 import useAppNavigation from '@app/hooks/useAppNavigation';
 import ROUTES from '@app/constants/routes';
+import sizes from '@app/constants/sizes';
 import {CDN_URL} from '@env';
 
 const OnboardingWelcome = () => {
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
   },
   image: {
     marginTop: 24,
-    width: Dimensions.get('window').width,
+    width: sizes.windowWidth,
     height: '100%',
   },
   buttonContainer: {

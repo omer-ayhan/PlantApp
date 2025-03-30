@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Image, Dimensions} from 'react-native';
+import {StyleSheet, View, Image} from 'react-native';
 
 import Animated, {
   SharedValue,
@@ -11,6 +11,7 @@ import Animated, {
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient';
+import FastImage from 'react-native-fast-image';
 
 import AnimatedTransition from '@app/components/ui/AnimatedTransition';
 import StyledButton from '@app/components/ui/StyledButton';
@@ -19,8 +20,8 @@ import useAppNavigation from '@app/hooks/useAppNavigation';
 import colors from '@app/lib/colors';
 import ROUTES from '@app/constants/routes';
 import theme from '@app/constants/theme';
+import sizes from '@app/constants/sizes';
 import {CDN_URL} from '@env';
-import FastImage from 'react-native-fast-image';
 
 const DOTS_ARRAY = Array.from({length: 3}, (_, index) => index);
 
@@ -292,8 +293,8 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.dark,
   },
   infoBackground: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    width: sizes.windowWidth,
+    height: sizes.windowHeight,
     position: 'absolute',
     top: 0,
     left: 0,
@@ -305,8 +306,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 20,
     right: 0,
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height * 0.4,
+    width: sizes.windowWidth,
+    height: sizes.windowHeight * 0.4,
     zIndex: 0,
   },
 });
