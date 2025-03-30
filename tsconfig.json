@@ -14,5 +14,5 @@
       "@app/lib/*": ["src/lib/*"]
     }
   },
-  "include": ["src/**/*", "src/types/*.d.ts", "App.tsx"]
+  "include": ["src/**/*", "src/types/*.d.ts", "App.tsx", "scripts/*"]
 }
