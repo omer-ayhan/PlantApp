@@ -1,22 +1,76 @@
-import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  Linking,
+  Platform,
+  StatusBar,
+  Pressable,
+  ListRenderItemInfo,
+} from 'react-native';
 
 import {CommonActions} from '@react-navigation/native';
+import {BlurView} from '@react-native-community/blur';
+import {scale} from 'react-native-size-matters';
+import FastImage from 'react-native-fast-image';
 
+import Ripple from '@app/components/ui/Ripple';
+import Icon from '@app/components/Icon';
+import StyledButton from '@app/components/ui/StyledButton';
+import OfferButton from '@app/components/Paywall/OfferButton';
+import CustomSafeArea from '@app/components/ui/CustomSafeArea';
+import StyledText from '@app/components/ui/StyledText';
 import useAppNavigation from '@app/hooks/useAppNavigation';
+import colors from '@app/lib/colors';
 import ROUTES from '@app/constants/routes';
+import theme from '@app/constants/theme';
+import sizes from '@app/constants/sizes';
+
+type PaywallFeature = {
+  icon: IconNames;
+  title: string;
+  description: string;
+};
+
+const PAYWALL_FEATURES: PaywallFeature[] = [
+  {
+    icon: 'scan',
+    title: 'Unlimited',
+    description: 'Plant Identify',
+  },
+  {
+    icon: 'speed-meter',
+    title: 'Faster',
+    description: 'Process',
+  },
+  {
+    icon: 'herb',
+    title: 'Detailed',
+    description: 'Plant care',
+  },
+];
+const BOTTOM_LINKS = [
+  {
+    title: 'Terms',
+    link: 'https://www.google.com',
+  },
+  {
+    title: 'Privacy',
+    link: 'https://www.google.com',
+  },
+  {
+    title: 'Restore',
+    onPress: () => {
+      console.log('Restore');
+    },
+  },
+];
+const PAYWALL_FEATURES_ITEM_WIDTH = scale(140) + scale(16);
 
 const Paywall = () => {
   const navigation = useAppNavigation();
-
-  const handleSubscribePress = () => {
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{name: ROUTES.MAIN_TABS}],
-      }),
-    );
-  };
+  const [selectedOffer, setSelectedOffer] = useState<'month' | 'year'>('month');
 
   const handleContinuePress = () => {
     navigation.dispatch(
@@ -27,60 +81,223 @@ const Paywall = () => {
     );
   };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Paywall Screen</Text>
-      <TouchableOpacity
-        style={styles.subscribeButton}
-        onPress={handleSubscribePress}>
-        <Text style={styles.buttonText}>Subscribe Now</Text>
-      </TouchableOpacity>
+  const renderFeatureItem = ({item}: ListRenderItemInfo<PaywallFeature>) => (
+    <View style={styles.featureItemContainer}>
+      <View style={styles.featureItemIconContainer}>
+        <Icon name={item.icon} size={18} color="white" />
+      </View>
 
-      <TouchableOpacity
-        style={styles.continueButton}
-        onPress={handleContinuePress}>
-        <Text style={styles.continueText}>Continue with limited access</Text>
-      </TouchableOpacity>
+      <StyledText variant="h2" color="white" weight="medium">
+        {item.title}
+      </StyledText>
+      <StyledText
+        size={scale(13)}
+        color={colors.hexToRgba(theme.colors.white, 0.7)}
+        weight="regular">
+        {item.description}
+      </StyledText>
+      {Platform.OS === 'ios' && (
+        <BlurView
+          style={[StyleSheet.absoluteFillObject, styles.featureItemBlur]}
+          blurAmount={18}
+          blurType="materialDark"
+          reducedTransparencyFallbackColor={colors.hexToRgba(
+            theme.colors.white,
+            0.08,
+          )}
+        />
+      )}
     </View>
+  );
+
+  return (
+    <CustomSafeArea edges={['top', 'bottom']} style={styles.safeAreaContainer}>
+      <FastImage
+        source={require('@app/assets/paywall_plant.png')}
+        style={styles.plantImage}
+        resizeMode="cover"
+      />
+      <Ripple style={styles.closeButtonContainer}>
+        <Pressable style={styles.closeButton} onPress={handleContinuePress}>
+          <Icon name="close" size={13} color="white" />
+        </Pressable>
+      </Ripple>
+      <View style={styles.contentContainer}>
+        <View style={styles.contentHeaderContainer}>
+          <StyledText weight="light" size={scale(27)} color="white">
+            <StyledText weight="bold" size={scale(27)} color="white">
+              PlantApp
+            </StyledText>{' '}
+            Premium
+          </StyledText>
+          <StyledText
+            weight="light"
+            size={scale(17)}
+            color={colors.hexToRgba(theme.colors.white, 0.7)}>
+            Access All Features
+          </StyledText>
+        </View>
+        <View style={styles.featuresContainer}>
+          <FlatList
+            contentContainerStyle={styles.featuresListContainer}
+            showsHorizontalScrollIndicator={false}
+            horizontal
+            data={PAYWALL_FEATURES}
+            renderItem={renderFeatureItem}
+            snapToAlignment="start"
+            decelerationRate="fast"
+            snapToInterval={PAYWALL_FEATURES_ITEM_WIDTH}
+          />
+        </View>
+        <View style={styles.offerButtonsContainer}>
+          <OfferButton
+            title="1 Month"
+            description={
+              <StyledText
+                variant="caption"
+                color={colors.hexToRgba(theme.colors.white, 0.7)}>
+                $2.99/month
+                <StyledText
+                  variant="caption"
+                  weight="regular"
+                  color={colors.hexToRgba(theme.colors.white, 0.7)}>
+                  , auto renewable
+                </StyledText>
+              </StyledText>
+            }
+            isSelected={selectedOffer === 'month'}
+            onPress={() => {
+              setSelectedOffer('month');
+            }}
+          />
+
+          <OfferButton
+            title="1 Year"
+            description={
+              <StyledText
+                variant="caption"
+                color={colors.hexToRgba(theme.colors.white, 0.7)}
+                weight="regular">
+                First 3 days free, then $529,99/year
+              </StyledText>
+            }
+            isSelected={selectedOffer === 'year'}
+            badgeText="Save 50%"
+            onPress={() => {
+              setSelectedOffer('year');
+            }}
+          />
+
+          <StyledButton
+            onPress={handleContinuePress}
+            title="Try free for 3 days"
+          />
+
+          <StyledText
+            style={styles.offerDisclaimer}
+            size={scale(9)}
+            weight="light"
+            color={colors.hexToRgba(theme.colors.white, 0.52)}
+            textAlign="center">
+            After the 3-day free trial period you'll be charged ₺274.99 per year
+            unless you cancel before the trial expires. Yearly Subscription is
+            Auto-Renewable
+          </StyledText>
+          <View style={styles.bottomLinksContainer}>
+            {BOTTOM_LINKS.map((bottomLink, i) => (
+              <Pressable
+                key={`bottom-link-${i}`}
+                onPress={
+                  bottomLink.onPress
+                    ? bottomLink.onPress
+                    : () => Linking.openURL(bottomLink.link)
+                }>
+                <StyledText
+                  size={scale(11)}
+                  weight="regular"
+                  color={colors.hexToRgba(theme.colors.white, 0.5)}>
+                  {`${bottomLink.title}${
+                    i < BOTTOM_LINKS.length - 1 ? '  •  ' : ''
+                  }`}
+                </StyledText>
+              </Pressable>
+            ))}
+          </View>
+        </View>
+      </View>
+    </CustomSafeArea>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  safeAreaContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
+    backgroundColor: theme.colors.dark_500,
+    position: 'relative',
   },
-  text: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 30,
-  },
-  subscribeButton: {
-    backgroundColor: '#28AF6E',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
+  plantImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
     width: '100%',
-    alignItems: 'center',
+    height: sizes.windowHeight * 0.6,
+    zIndex: -1,
+  },
+  closeButtonContainer: {
+    position: 'absolute',
+    top: Platform.select({
+      ios: scale(42),
+      android: StatusBar?.currentHeight ?? scale(21),
+    }),
+    right: scale(16),
+    backgroundColor: colors.hexToRgba(theme.colors.black, 0.4),
+    zIndex: 1,
+    borderRadius: 50,
+  },
+  closeButton: {
+    paddingVertical: scale(8),
+    paddingHorizontal: scale(8),
+  },
+  headerContainer: {
+    gap: scale(6),
+  },
+  contentContainer: {flex: 1, justifyContent: 'flex-end'},
+  contentHeaderContainer: {paddingHorizontal: scale(24)},
+  featuresContainer: {
+    paddingTop: scale(20),
+    paddingBottom: scale(24),
+  },
+  featuresListContainer: {
+    paddingHorizontal: scale(24),
+    gap: scale(10),
+  },
+  featureItemContainer: {
+    position: 'relative',
+    minWidth: scale(140),
+    alignItems: 'flex-start',
+    alignSelf: 'flex-start',
+    padding: scale(16),
+    borderRadius: 14,
+    overflow: 'hidden',
+    backgroundColor:
+      Platform.OS === 'android'
+        ? colors.hexToRgba(theme.colors.white, 0.05)
+        : undefined,
+  },
+  featureItemIconContainer: {
+    padding: 9,
+    backgroundColor: colors.hexToRgba(theme.colors.black, 0.25),
+    borderRadius: 8,
     marginBottom: 16,
   },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
+  featureItemBlur: {zIndex: -1},
+  offerButtonsContainer: {
+    paddingHorizontal: scale(24),
   },
-  continueButton: {
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-    width: '100%',
-    alignItems: 'center',
-  },
-  continueText: {
-    color: '#28AF6E',
-    fontSize: 14,
+  offerDisclaimer: {marginTop: scale(8), marginBottom: scale(10)},
+  bottomLinksContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 });
 
