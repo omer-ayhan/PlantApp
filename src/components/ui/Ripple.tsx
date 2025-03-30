@@ -12,13 +12,13 @@ import Animated, {
 
 import theme from '@app/constants/theme';
 
-interface RippleProps {
+type RippleProps = {
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
   rippleDuration?: number;
   rippleRadius?: number;
   rippleColor?: string;
-}
+};
 
 const Ripple = ({
   children,
