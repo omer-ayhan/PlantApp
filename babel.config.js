@@ -6,7 +6,21 @@ module.exports = {
       'module-resolver',
       {
         root: ['./'],
-        extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
+        extensions: [
+          '.ios.js',
+          '.android.js',
+          '.ios.jsx',
+          '.android.jsx',
+          '.js',
+          '.jsx',
+          '.json',
+          '.ts',
+          '.tsx',
+          '.png',
+          '.jpg',
+          '.jpeg',
+          '.gif',
+        ],
         alias: {
           '@app/navigation': './src/navigation',
           '@app/components': './src/components',
