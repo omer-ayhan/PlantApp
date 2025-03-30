@@ -5,6 +5,7 @@
  * @returns RGBA color string
  */
 const hexToRgba = (hex: string, alpha: number = 1): string => {
+  'worklet';
   const cleanHex = hex.replace('#', '');
 
   let r: number, g: number, b: number;
