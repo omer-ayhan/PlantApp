@@ -26,6 +26,7 @@ import colors from '@app/lib/colors';
 import ROUTES from '@app/constants/routes';
 import theme from '@app/constants/theme';
 import sizes from '@app/constants/sizes';
+import {CDN_URL} from '@env';
 
 type PaywallFeature = {
   icon: IconNames;
@@ -113,7 +114,9 @@ const Paywall = () => {
   return (
     <CustomSafeArea edges={['top', 'bottom']} style={styles.safeAreaContainer}>
       <FastImage
-        source={require('@app/assets/paywall_plant.png')}
+        source={{
+          uri: `${CDN_URL}/paywall/paywall_plant.png`,
+        }}
         style={styles.plantImage}
         resizeMode="cover"
       />
