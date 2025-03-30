@@ -10,7 +10,7 @@ import RootNavigator from '@app/navigation/RootNavigator';
 function App(): React.JSX.Element {
   return (
     <GestureHandlerRootView style={styles.gestureHandlerRootView}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="dark-content" translucent={false} />
       <NavigationContainer ref={navigation.navigationRef}>
         <RootNavigator />
       </NavigationContainer>
