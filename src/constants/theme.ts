@@ -103,9 +103,17 @@ const sfTypography: TypographyVariantType = {
 const colors = {
   primary: '#28AF6E',
   dark: '#13231B',
+  dark_500: '#101E17',
   green_dark: '#597165B2',
   gray: '#BDBDBD',
+  gray_100: '#FBFAFA',
+  gray_200: '#ABABAB',
+  gray_300: '#3C3C43',
+  gray_500: '#979798',
   white: '#FFFFFF',
+  black: '#000000',
+  yellow: '#E5C990',
+  yellow_900: '#24201A',
 };
 
 const theme = {
