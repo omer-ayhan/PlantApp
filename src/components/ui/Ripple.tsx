@@ -35,18 +35,18 @@ const Ripple = ({
   const opacity = useSharedValue(0.3);
   const boxRef = useAnimatedRef<View>();
 
-  const longPress = Gesture.LongPress()
-    .minDuration(0)
-    .onStart(event => {
+  const tap = Gesture.Tap()
+    .onBegin(event => {
       opacity.value = 0.4;
       translateX.value = event.x;
       translateY.value = event.y;
       scale.value = 0;
       scale.value = withTiming(1, {duration: rippleDuration});
     })
-    .onEnd(() => {
+    .onFinalize(() => {
       opacity.value = withTiming(0, {duration: rippleDuration});
-    });
+    })
+    .shouldCancelWhenOutside(false);
 
   const animatedCircle = useAnimatedStyle(() => {
     const boxLayout = measure(boxRef);
@@ -77,11 +77,10 @@ const Ripple = ({
   });
 
   return (
-    <GestureDetector gesture={longPress}>
+    <GestureDetector gesture={tap}>
       <View style={[styles.container, style]} ref={boxRef}>
         {children}
-
-        <Animated.View style={[animatedCircle, styles.ripple]} />
+        <Animated.View style={animatedCircle} pointerEvents="none" />
       </View>
     </GestureDetector>
   );
@@ -92,8 +91,5 @@ export default Ripple;
 const styles = StyleSheet.create({
   container: {
     overflow: 'hidden',
-  },
-  ripple: {
-    pointerEvents: 'none',
   },
 });
