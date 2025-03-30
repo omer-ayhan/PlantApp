@@ -1,8 +1,15 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, ImageBackground, Dimensions} from 'react-native';
 
+import FastImage from 'react-native-fast-image';
+import {SafeAreaView} from 'react-native-safe-area-context';
+
+import StyledText from '@app/components/ui/StyledText';
+import AnimatedTransition from '@app/components/ui/AnimatedTransition';
+import StyledButton from '@app/components/ui/StyledButton';
 import useAppNavigation from '@app/hooks/useAppNavigation';
 import ROUTES from '@app/constants/routes';
+import {CDN_URL} from '@env';
 
 const OnboardingWelcome = () => {
   const navigation = useAppNavigation();
@@ -12,36 +19,120 @@ const OnboardingWelcome = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Onboarding Welcome Screen</Text>
-      <TouchableOpacity style={styles.button} onPress={handleNextPress}>
-        <Text style={styles.buttonText}>Next</Text>
-      </TouchableOpacity>
-    </View>
+    <ImageBackground
+      source={{
+        uri: `${CDN_URL}/onboarding/onboarding_welcome_bg.jpg`,
+      }}
+      style={styles.container}>
+      <SafeAreaView edges={['top', 'bottom']} style={styles.safeAreaContainer}>
+        <AnimatedTransition
+          style={styles.textContainer}
+          isActive={true}
+          enteringChild={
+            <>
+              <StyledText variant="title" weight="regular">
+                Welcome to{' '}
+                <StyledText variant="title" weight="bold">
+                  PlantApp
+                </StyledText>
+              </StyledText>
+              <StyledText variant="body1" color="dark" style={styles.text}>
+                Identify more than 3000+ plants and {`\n`}88% accuracy.
+              </StyledText>
+            </>
+          }
+          exitingChild={null}
+          delay={{entering: 500, exiting: 0}}
+        />
+        <AnimatedTransition
+          style={styles.imageContainer}
+          isActive={true}
+          enteringChild={
+            <FastImage
+              source={{
+                uri: `${CDN_URL}/onboarding/welcome_plant.png`,
+              }}
+              resizeMode={FastImage.resizeMode.contain}
+              style={styles.image}
+            />
+          }
+          exitingChild={null}
+          transitionType="fadeBottomToTop"
+          delay={{entering: 250, exiting: 0}}
+        />
+
+        <View style={styles.buttonContainer}>
+          <StyledButton onPress={handleNextPress} title="Get Started" />
+          <StyledText
+            variant="caption"
+            color="green_dark"
+            weight="regular"
+            style={[styles.bottomText, styles.bottomTextWrapper]}>
+            By tapping next, you are agreeing to PlantID {`\n`}{' '}
+            <StyledText
+              variant="caption"
+              color="green_dark"
+              weight="regular"
+              style={[styles.bottomText, styles.bottomTextLink]}>
+              Terms of Use
+            </StyledText>{' '}
+            &{' '}
+            <StyledText
+              variant="caption"
+              color="green_dark"
+              weight="regular"
+              style={[styles.bottomText, styles.bottomTextLink]}>
+              Privacy Policy
+            </StyledText>
+            .
+          </StyledText>
+        </View>
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  },
+  safeAreaContainer: {
+    flex: 1,
   },
   text: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 30,
+    marginTop: 8,
+    opacity: 0.7,
   },
-  button: {
-    backgroundColor: '#28AF6E',
-    paddingVertical: 12,
+  textContainer: {
     paddingHorizontal: 24,
-    borderRadius: 8,
+    paddingTop: 12,
   },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
+  imageContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    marginTop: 24,
+    width: Dimensions.get('window').width,
+    height: '100%',
+  },
+  buttonContainer: {
+    paddingHorizontal: 24,
+    marginBottom: 8,
+    flex: 0,
+    justifyContent: 'flex-end',
+  },
+  bottomTextWrapper: {
+    textAlign: 'center',
+    marginTop: 17,
+  },
+  bottomText: {
+    fontSize: 11,
+    lineHeight: 16,
+  },
+  bottomTextLink: {
+    textDecorationLine: 'underline',
   },
 });
 
