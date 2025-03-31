@@ -12,7 +12,7 @@ import {
 
 import {CommonActions} from '@react-navigation/native';
 import {BlurView} from '@react-native-community/blur';
-import {scale} from 'react-native-size-matters';
+import {moderateVerticalScale, scale} from 'react-native-size-matters';
 import FastImage from 'react-native-fast-image';
 
 import Ripple from '@app/components/UI/Animations/Ripple';
@@ -130,7 +130,13 @@ const Paywall = () => {
       </Ripple>
       <View style={styles.contentContainer}>
         <View style={styles.contentHeaderContainer}>
-          <StyledText weight="light" size={scale(27)} color="white">
+          <StyledText
+            style={{
+              marginBottom: moderateVerticalScale(3),
+            }}
+            weight="light"
+            size={scale(27)}
+            color="white">
             <StyledText weight="bold" size={scale(27)} color="white">
               PlantApp
             </StyledText>{' '}
@@ -178,6 +184,7 @@ const Paywall = () => {
           />
 
           <OfferButton
+            style={styles.offerButton}
             title="1 Year"
             description={
               <StyledText
@@ -286,9 +293,7 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     overflow: 'hidden',
     backgroundColor:
-      Platform.OS === 'android'
-        ? colors.hexToRgba(theme.colors.white, 0.05)
-        : undefined,
+      Platform.OS === 'android' ? theme.colors.paywall_feature : undefined,
   },
   featureItemIconContainer: {
     padding: 9,
@@ -304,6 +309,9 @@ const styles = StyleSheet.create({
   bottomLinksContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+  offerButton: {
+    marginBottom: scale(18),
   },
 });
 

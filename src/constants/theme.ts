@@ -105,6 +105,7 @@ const colors = {
   dark: '#13231B',
   dark_500: '#101E17',
   green_dark: '#597165B2',
+  paywall_feature: '#24312A',
   gray: '#BDBDBD',
   gray_100: '#FBFAFA',
   gray_200: '#ABABAB',
