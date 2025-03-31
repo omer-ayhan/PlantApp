@@ -1,5 +1,5 @@
 import type {ReactNode} from 'react';
-import {Pressable, StyleSheet, View} from 'react-native';
+import {Pressable, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 
 import Animated, {useAnimatedStyle, withTiming} from 'react-native-reanimated';
 import {scale} from 'react-native-size-matters';
@@ -17,6 +17,7 @@ type OfferButtonProps = {
   badgeText?: string;
   isSelected: boolean;
   onPress?: () => void;
+  style?: StyleProp<ViewStyle>;
 };
 
 const OfferButton = ({
@@ -25,9 +26,13 @@ const OfferButton = ({
   badgeText,
   isSelected,
   onPress,
+  style,
 }: OfferButtonProps) => {
   const pressableStyle = useAnimatedStyle(() => {
     return {
+      backgroundColor: isSelected
+        ? 'transparent'
+        : colors.hexToRgba(theme.colors.white, 0.05),
       borderColor: withTiming(
         isSelected
           ? theme.colors.primary
@@ -63,7 +68,7 @@ const OfferButton = ({
 
   return (
     <AnimatedPressable
-      style={[styles.container, pressableStyle]}
+      style={[styles.container, pressableStyle, style]}
       onPress={onPress}>
       {badgeText && (
         <View style={styles.badgeContainer}>
@@ -109,9 +114,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: scale(12),
-    backgroundColor: colors.hexToRgba(theme.colors.white, 0.05),
     paddingHorizontal: scale(16),
-    paddingVertical: scale(13),
+    paddingVertical: scale(10),
     borderRadius: 14,
     borderWidth: 1,
     borderColor: colors.hexToRgba(theme.colors.white, 0.3),

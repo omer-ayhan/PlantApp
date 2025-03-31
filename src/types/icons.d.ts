@@ -4,4 +4,4 @@
 /**
  * Available icon names in the application
  */
-type IconNames = 'chevron-right' | 'close' | 'health' | 'herb' | 'person' | 'plant' | 'scan-alternative' | 'scan' | 'search' | 'speed-meter' | 'stack';
+type IconNames = 'chevron-right' | 'close' | 'flash-off' | 'flash-on' | 'health' | 'herb' | 'info' | 'person' | 'plant' | 'scan-alternative' | 'scan' | 'search' | 'speed-meter' | 'stack';
