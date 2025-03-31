@@ -114,6 +114,7 @@ const colors = {
   black: '#000000',
   yellow: '#E5C990',
   yellow_900: '#24201A',
+  shimmerColor: 'rgb(234, 234, 234)',
 };
 
 const theme = {
