@@ -12,8 +12,6 @@ const ROUTES = Object.freeze({
   PROFILE: 'Profile',
 
   SCAN: 'Scan',
-
-  CHAT: 'Chat',
 });
 
 export default ROUTES;

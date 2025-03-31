@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -6,10 +6,15 @@ import {
   Pressable,
   ScrollView,
   StatusBar,
+  RefreshControl,
 } from 'react-native';
 
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {moderateScale, scale} from 'react-native-size-matters';
+import {
+  moderateScale,
+  moderateVerticalScale,
+  scale,
+} from 'react-native-size-matters';
 import {FlashList} from '@shopify/flash-list';
 import FastImage from 'react-native-fast-image';
 
@@ -17,53 +22,81 @@ import HomePlantCard from '@app/components/Home/HomePlantCard';
 import HomeCategoryCard from '@app/components/Home/HomeCategoryCard';
 import StyledText from '@app/components/UI/StyledText';
 import Icon from '@app/components/Icon';
-import Ripple from '@app/components/UI/Ripple';
+import Ripple from '@app/components/UI/Animations/Ripple';
 import MailUpgrade from '@app/components/Icon/MailUpgrade';
+import ShimmerLoader from '@app/components/UI/Animations/Shimmer';
+import useAppNavigation from '@app/hooks/useAppNavigation';
+import plantsApi from '@app/store/api/plantsApi';
 import colors from '@app/lib/colors';
 import ROUTES from '@app/constants/routes';
 import theme from '@app/constants/theme';
 import sizes from '@app/constants/sizes';
 import {CDN_URL} from '@env';
-import useAppNavigation from '@app/hooks/useAppNavigation';
 
-const PLANT_CARDS = [
-  {
-    id: 1,
-    image: `${CDN_URL}/paywall/paywall_plant.png`,
-    title: 'How to identify plants easily with PlantApp?',
-  },
-  {
-    id: 2,
-    image: `${CDN_URL}/paywall/paywall_plant.png`,
-    title: 'Species and varieties, what are the differences?',
-  },
-  {
-    id: 3,
-    image: `${CDN_URL}/paywall/paywall_plant.png`,
-    title: 'The reasons why the same plant can look different',
-  },
-];
-const PLANT_CATEGORIES = [
-  {
-    id: 1,
-    image: 'https://cms-cdn.plantapp.app/5_d2384a3938/5_d2384a3938.png',
-    title: 'Edible Plants',
-  },
-  {
-    id: 2,
-    image: 'https://cms-cdn.plantapp.app/5_d2384a3938/5_d2384a3938.png',
-    title: 'Vegetables and Fruits',
-  },
-  {
-    id: 3,
-    image: 'https://cms-cdn.plantapp.app/5_d2384a3938/5_d2384a3938.png',
-    title: 'Cacti and Succulents',
-  },
-];
 const PLANT_CARD_WIDTH = moderateScale(240) + scale(12);
+
+const HomeCategoryCardShimmer = ({count = 4}) => {
+  return (
+    <View style={styles.shimmerGridContainer}>
+      {Array(count)
+        .fill(null)
+        .map((_, index) => (
+          <View
+            key={`plant-category-card-shimmer-${index}`}
+            style={styles.shimmerCategoryCardContainer}>
+            <ShimmerLoader
+              width={sizes.windowWidth * 0.5 - (scale(24) + scale(6))}
+              height={scale(150)}
+              borderRadius={scale(12)}
+            />
+          </View>
+        ))}
+    </View>
+  );
+};
+const HomePlantCardsRowShimmer = ({count = 3}) => {
+  return (
+    <View style={styles.shimmerRowContainer}>
+      {Array(count)
+        .fill(null)
+        .map((_, index) => (
+          <View
+            key={`plant-card-shimmer-${index}`}
+            style={styles.shimmerPlantCardContainer}>
+            <ShimmerLoader
+              width={moderateScale(240)}
+              height={moderateVerticalScale(165)}
+              borderRadius={scale(12)}
+            />
+          </View>
+        ))}
+    </View>
+  );
+};
 
 const Home = () => {
   const navigation = useAppNavigation();
+  const {
+    data: plantCategories,
+    refetch: refetchPlantCategories,
+    isLoading: isLoadingCategories,
+  } = plantsApi.useGetPlantCategoriesQuery();
+  const {
+    data: plantQuestions,
+    refetch: refetchPlantQuestions,
+    isLoading: isLoadingQuestions,
+  } = plantsApi.useGetPlantQuestionsQuery();
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const handleRefresh = async () => {
+    try {
+      setIsRefreshing(true);
+      await refetchPlantCategories();
+      await refetchPlantQuestions();
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
 
   const navigateToPaywall = () => {
     navigation.navigate(ROUTES.PAYWALL);
@@ -100,7 +133,10 @@ const Home = () => {
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.scrollViewContent}>
+        contentContainerStyle={styles.scrollViewContent}
+        refreshControl={
+          <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />
+        }>
         <Ripple
           style={styles.freePremiumContainer}
           rippleColor={theme.colors.yellow}>
@@ -137,28 +173,36 @@ const Home = () => {
           <StyledText variant="subtitle1" style={styles.getStartedText}>
             Get Started
           </StyledText>
-
-          <FlashList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={PLANT_CARDS}
-            snapToAlignment="start"
-            decelerationRate="fast"
-            snapToInterval={PLANT_CARD_WIDTH}
-            renderItem={({item}) => (
-              <HomePlantCard image={item.image} title={item.title} />
-            )}
-          />
+          {isLoadingQuestions || !plantQuestions ? (
+            <HomePlantCardsRowShimmer count={3} />
+          ) : (
+            <FlashList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={plantQuestions}
+              snapToAlignment="start"
+              decelerationRate="fast"
+              snapToInterval={PLANT_CARD_WIDTH}
+              estimatedItemSize={PLANT_CARD_WIDTH}
+              renderItem={({item}: {item: PlantQuestion}) => (
+                <HomePlantCard image={item.image_uri} title={item.title} />
+              )}
+            />
+          )}
         </View>
 
         <View style={styles.categoriesContainer}>
-          {PLANT_CATEGORIES.map(plantCategory => (
-            <HomeCategoryCard
-              key={plantCategory.id}
-              image={plantCategory.image}
-              title={plantCategory.title}
-            />
-          ))}
+          {isLoadingCategories || !plantCategories ? (
+            <HomeCategoryCardShimmer count={4} />
+          ) : (
+            plantCategories?.data.map(plantCategory => (
+              <HomeCategoryCard
+                key={plantCategory.id}
+                image={plantCategory.image.url}
+                title={plantCategory.title}
+              />
+            ))
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -253,6 +297,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+  },
+  shimmerCategoryCardContainer: {
+    marginBottom: scale(12),
+  },
+  shimmerPlantCardContainer: {
+    marginRight: scale(12),
+  },
+  shimmerGridContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  shimmerRowContainer: {
+    flexDirection: 'row',
   },
 });
 

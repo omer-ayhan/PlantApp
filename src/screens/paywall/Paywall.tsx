@@ -15,13 +15,14 @@ import {BlurView} from '@react-native-community/blur';
 import {scale} from 'react-native-size-matters';
 import FastImage from 'react-native-fast-image';
 
-import Ripple from '@app/components/UI/Ripple';
+import Ripple from '@app/components/UI/Animations/Ripple';
 import Icon from '@app/components/Icon';
 import StyledButton from '@app/components/UI/StyledButton';
 import OfferButton from '@app/components/Paywall/OfferButton';
-import CustomSafeArea from '@app/components/UI/CustomSafeArea';
+import CustomSafeArea from '@app/components/UI/Layout/CustomSafeArea';
 import StyledText from '@app/components/UI/StyledText';
 import useAppNavigation from '@app/hooks/useAppNavigation';
+import useOnboarding from '@app/hooks/redux/useOnboarding';
 import colors from '@app/lib/colors';
 import ROUTES from '@app/constants/routes';
 import theme from '@app/constants/theme';
@@ -72,6 +73,7 @@ const PAYWALL_FEATURES_ITEM_WIDTH = scale(140) + scale(16);
 const Paywall = () => {
   const navigation = useAppNavigation();
   const [selectedOffer, setSelectedOffer] = useState<'month' | 'year'>('month');
+  const {completeOnboarding} = useOnboarding();
 
   const handleContinuePress = () => {
     navigation.dispatch(
@@ -80,6 +82,7 @@ const Paywall = () => {
         routes: [{name: ROUTES.MAIN_TABS}],
       }),
     );
+    completeOnboarding();
   };
 
   const renderFeatureItem = ({item}: ListRenderItemInfo<PaywallFeature>) => (

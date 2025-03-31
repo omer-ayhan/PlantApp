@@ -11,7 +11,9 @@
       "@app/assets/*": ["src/assets/*"],
       "@app/hooks/*": ["src/hooks/*"],
       "@app/styles/*": ["src/styles/*"],
-      "@app/lib/*": ["src/lib/*"]
+      "@app/lib/*": ["src/lib/*"],
+      "@app/store": ["src/store"],
+      "@app/store/*": ["src/store/*"]
     }
   },
   "include": ["src/**/*", "src/types/*.d.ts", "App.tsx", "scripts/*"]
