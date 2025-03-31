@@ -13,9 +13,9 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient';
 import FastImage from 'react-native-fast-image';
 
-import AnimatedTransition from '@app/components/ui/AnimatedTransition';
-import StyledButton from '@app/components/ui/StyledButton';
-import StyledText from '@app/components/ui/StyledText';
+import AnimatedTransition from '@app/components/UI/AnimatedTransition';
+import StyledButton from '@app/components/UI/StyledButton';
+import StyledText from '@app/components/UI/StyledText';
 import useAppNavigation from '@app/hooks/useAppNavigation';
 import colors from '@app/lib/colors';
 import ROUTES from '@app/constants/routes';

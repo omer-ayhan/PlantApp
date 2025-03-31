@@ -4,9 +4,9 @@ import {View, StyleSheet, ImageBackground} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-import StyledText from '@app/components/ui/StyledText';
-import AnimatedTransition from '@app/components/ui/AnimatedTransition';
-import StyledButton from '@app/components/ui/StyledButton';
+import StyledText from '@app/components/UI/StyledText';
+import AnimatedTransition from '@app/components/UI/AnimatedTransition';
+import StyledButton from '@app/components/UI/StyledButton';
 import useAppNavigation from '@app/hooks/useAppNavigation';
 import ROUTES from '@app/constants/routes';
 import sizes from '@app/constants/sizes';
