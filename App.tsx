@@ -3,11 +3,22 @@ import {StatusBar, StyleSheet} from 'react-native';
 
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
+import BootSplash from 'react-native-bootsplash';
 
 import navigation from '@app/lib/navigation';
 import RootNavigator from '@app/navigation/RootNavigator';
 
 function App(): React.JSX.Element {
+  useEffect(() => {
+    const init = async () => {
+      // async tasks
+    };
+
+    init().finally(async () => {
+      await BootSplash.hide({fade: true});
+    });
+  }, []);
+
   return (
     <GestureHandlerRootView style={styles.gestureHandlerRootView}>
       <StatusBar barStyle="dark-content" translucent={false} />

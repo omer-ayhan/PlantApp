@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 
 import {SafeAreaView} from 'react-native-safe-area-context';
-import FastImage from 'react-native-fast-image';
 import {moderateScale, scale} from 'react-native-size-matters';
 import {FlashList} from '@shopify/flash-list';
+import FastImage from 'react-native-fast-image';
 
 import HomePlantCard from '@app/components/Home/HomePlantCard';
 import HomeCategoryCard from '@app/components/Home/HomeCategoryCard';
@@ -20,9 +20,11 @@ import Icon from '@app/components/Icon';
 import Ripple from '@app/components/UI/Ripple';
 import MailUpgrade from '@app/components/Icon/MailUpgrade';
 import colors from '@app/lib/colors';
+import ROUTES from '@app/constants/routes';
 import theme from '@app/constants/theme';
 import sizes from '@app/constants/sizes';
 import {CDN_URL} from '@env';
+import useAppNavigation from '@app/hooks/useAppNavigation';
 
 const PLANT_CARDS = [
   {
@@ -61,6 +63,12 @@ const PLANT_CATEGORIES = [
 const PLANT_CARD_WIDTH = moderateScale(240) + scale(12);
 
 const Home = () => {
+  const navigation = useAppNavigation();
+
+  const navigateToPaywall = () => {
+    navigation.navigate(ROUTES.PAYWALL);
+  };
+
   return (
     <SafeAreaView edges={['top']} style={styles.container}>
       <View style={styles.headerContainer}>
@@ -96,7 +104,9 @@ const Home = () => {
         <Ripple
           style={styles.freePremiumContainer}
           rippleColor={theme.colors.yellow}>
-          <Pressable style={styles.freePremiumButton}>
+          <Pressable
+            style={styles.freePremiumButton}
+            onPress={navigateToPaywall}>
             <MailUpgrade />
 
             <View style={styles.freePremiumTextContainer}>
