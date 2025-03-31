@@ -1,138 +1,158 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Plant App 🌱
 
-# Getting Started
+A React Native application for plant care and management.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Prerequisites
 
-## Step 1: Start Metro
+- Node.js (v18 or later)
+- Yarn
+- iOS: Xcode (latest version)
+- Android: Android Studio (latest version)
+- CocoaPods (for iOS)
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Environment Setup
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+1. Clone the repository:
 
-```sh
-# Using npm
-npm start
-
-# OR using Yarn
-yarn start
+```bash
+git clone [repository-url]
+cd plant-app
 ```
 
-## Step 2: Build and run your app
+2. Install dependencies:
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+```bash
+yarn install
+```
 
-### Android
+3. Install iOS dependencies:
 
-```sh
-# Using npm
-npm run android
+```bash
+cd ios
+bundle install
+bundle exec pod install
+cd ..
+```
 
-# OR using Yarn
+4. Create a `.env` file in the root directory with the following variables:
+
+```bash
+API_URL=https://dummy-api-jtg6bessta-ey.a.run.app
+CDN_URL=https://d1fph6iyrbbbme.cloudfront.net
+```
+
+## Running the App
+
+### Development
+
+```bash
+# Start Metro bundler
+yarn start
+
+# Run on iOS
+yarn ios
+
+# Run on Android
 yarn android
 ```
 
-### iOS
+### Production Build
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+```bash
+# iOS
+cd ios
+xcodebuild -workspace PlantApp.xcworkspace -scheme PlantApp -configuration Release
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+# Android
+cd android
+./gradlew assembleRelease
 ```
 
-Then, and every time you update your native dependencies, run:
+## Technical Stack
 
-```sh
-bundle exec pod install
+### Core Technologies
+
+- **Framework**: React Native v0.78.1
+- **Language**: TypeScript
+- **State Management**: Redux Toolkit with Redux Persist
+- **Navigation**: React Navigation (Native Stack & Bottom Tabs)
+
+### UI & Performance
+
+- **Styling**: React Native Size Matters
+- **Animations**: React Native Reanimated & Lottie
+- **Lists**: FlashList
+- **Images**: FastImage
+- **UI Components**:
+  - Bottom Sheet
+  - Linear Gradient
+  - Blur effects
+  - SVG support
+
+### Development Tools
+
+- **Type Checking**: TypeScript
+- **Code Quality**: ESLint
+- **Code Formatting**: Prettier
+- **Git Hooks**: Husky
+- **Commit Linting**: Commitlint
+- **Testing**: Jest
+- **Environment Variables**: React Native Dotenv
+
+## Project Structure
+
+```
+src/
+├── assets/          # Static assets (icons, images)
+├── components/      # Reusable UI components
+├── screens/         # Screen components
+├── navigation/      # Navigation configuration
+├── store/          # Redux store setup and slices
+├── hooks/          # Custom React hooks
+├── utils/          # Utility functions
+└── types/          # TypeScript type definitions
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+## Available Scripts
 
-```sh
-# Using npm
-npm run ios
+```bash
+# Development
+yarn start         # Start Metro bundler
+yarn ios          # Run iOS app
+yarn android      # Run Android app
 
-# OR using Yarn
-yarn ios
+# Code Quality
+yarn check:lint   # Run ESLint
+yarn check:type   # Run TypeScript type checking
+yarn check:code   # Run both lint and type checks
+
+# Icon Management
+yarn svg:generate # Generate icon types and JSON from SVG files
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Troubleshooting
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+### Common Issues
 
-## Step 3: Modify your app
+1. **Metro Bundler Issues**
 
-Now that you have successfully run the app, let's make changes!
+   ```bash
+   # Clear Metro cache
+   yarn start --reset-cache
+   ```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+2. **iOS Build Issues**
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+   ```bash
+   cd ios
+   pod deintegrate
+   pod install
+   ```
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+3. **Android Build Issues**
+   ```bash
+   cd android
+   ./gradlew clean
+   ```
 
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Components
-
-## Icon Component
-
-This component provides a simple way to use SVG icons in the application with full TypeScript support.
-
-### Usage
-
-```tsx
-import Icon, {IconNames} from './components/Icon';
-
-// Use icon with type safety
-<Icon icon="herb" size={24} color="#00FF00" />;
-
-// All available icons can be found in IconNames object
-console.log(Object.keys(IconNames)); // ['herb', 'scan', 'speed-meter']
-```
-
-### Adding new icons
-
-1. Add your SVG icons to the `src/assets/icons` directory
-2. Run `yarn icon:generate` to:
-   - Generate the updated `icons.json` file
-   - Generate updated TypeScript definitions (`iconTypes.d.ts`)
-
-The `iconTypes.d.ts` file is auto-generated and provides type definitions for all available icons.
-
-### How it works
-
-This component uses the following tools:
-
-- `svgps-cli` to convert SVGs to a format usable by `react-icomoon`
-- A custom script `generateIconTypes.js` to extract icon names from the JSON file and generate TypeScript types
-- `react-icomoon` and `react-native-svg` for rendering the icons
-
-The whole process ensures you get:
-
-- Strong typing (autocomplete for icon names)
-- Runtime safety (object with all available icon names)
-- SVG optimization
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+For more detailed troubleshooting, please refer to the [React Native Troubleshooting Guide](https://reactnative.dev/docs/troubleshooting).
