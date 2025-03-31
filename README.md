@@ -84,6 +84,7 @@ cd android
 - **Animations**: react-native-reanimated and lottie-react-native
 - **Lists**: @shopify/flash-list
 - **Images**: react-native-fast-image
+- **Camera**: react-native-vision-camera for camera functionality
 - **UI Components**:
   - @gorhom/react-native-bottom-sheet
   - react-native-linear-gradient
