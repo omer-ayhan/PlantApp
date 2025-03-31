@@ -31,6 +31,7 @@ module.exports = {
           '@app/types': './src/types',
           '@app/styles': './src/styles',
           '@app/lib': './src/lib',
+          '@app/store': './src/store',
         },
       },
     ],
