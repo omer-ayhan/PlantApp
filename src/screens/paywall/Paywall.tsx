@@ -22,6 +22,7 @@ import OfferButton from '@app/components/Paywall/OfferButton';
 import CustomSafeArea from '@app/components/UI/CustomSafeArea';
 import StyledText from '@app/components/UI/StyledText';
 import useAppNavigation from '@app/hooks/useAppNavigation';
+import useOnboarding from '@app/hooks/redux/useOnboarding';
 import colors from '@app/lib/colors';
 import ROUTES from '@app/constants/routes';
 import theme from '@app/constants/theme';
@@ -72,6 +73,7 @@ const PAYWALL_FEATURES_ITEM_WIDTH = scale(140) + scale(16);
 const Paywall = () => {
   const navigation = useAppNavigation();
   const [selectedOffer, setSelectedOffer] = useState<'month' | 'year'>('month');
+  const {completeOnboarding} = useOnboarding();
 
   const handleContinuePress = () => {
     navigation.dispatch(
@@ -80,6 +82,7 @@ const Paywall = () => {
         routes: [{name: ROUTES.MAIN_TABS}],
       }),
     );
+    completeOnboarding();
   };
 
   const renderFeatureItem = ({item}: ListRenderItemInfo<PaywallFeature>) => (
