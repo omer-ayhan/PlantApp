@@ -6,16 +6,7 @@ import Home from '@app/screens/home/Home';
 import Diagnose from '@app/screens/home/Diagnose';
 import MyGarden from '@app/screens/home/MyGarden';
 import Profile from '@app/screens/home/Profile';
-import TabBar from '@app/components/UI/TabBar';
 import ROUTES from '@app/constants/routes';
-
-export type MainTabsParamList = {
-  [ROUTES.HOME]: undefined;
-  [ROUTES.DIAGNOSE]: undefined;
-  [ROUTES.SCAN]: undefined;
-  [ROUTES.MY_GARDEN]: undefined;
-  [ROUTES.PROFILE]: undefined;
-};
 
 const Tab = createBottomTabNavigator<MainTabsParamList>();
 
@@ -24,8 +15,9 @@ const MainTabs = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-      }}
-      tabBar={props => <TabBar {...props} />}>
+        tabBarActiveTintColor: '#28AF6E',
+        tabBarInactiveTintColor: '#979798',
+      }}>
       <Tab.Screen
         name={ROUTES.HOME}
         component={Home}

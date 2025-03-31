@@ -5,7 +5,7 @@ import Animated, {useAnimatedStyle, withTiming} from 'react-native-reanimated';
 import {scale} from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient';
 
-import StyledText from '@app/components/UI/StyledText';
+import StyledText from '@app/components/ui/StyledText';
 import colors from '@app/lib/colors';
 import theme from '@app/constants/theme';
 
