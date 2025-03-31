@@ -15,7 +15,7 @@ import theme from '@app/constants/theme';
 import ROUTES from '@app/constants/routes';
 
 import StyledText from './StyledText';
-import Ripple from './Ripple';
+import Ripple from './Animations/Ripple';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 const SCAN_ANIMATION_CONFIG = {

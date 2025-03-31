@@ -13,7 +13,7 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient';
 import FastImage from 'react-native-fast-image';
 
-import AnimatedTransition from '@app/components/UI/AnimatedTransition';
+import AnimatedTransition from '@app/components/UI/Animations/AnimatedTransition';
 import StyledButton from '@app/components/UI/StyledButton';
 import StyledText from '@app/components/UI/StyledText';
 import useAppNavigation from '@app/hooks/useAppNavigation';

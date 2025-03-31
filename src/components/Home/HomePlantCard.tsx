@@ -7,7 +7,7 @@ import {
 } from 'react-native-size-matters';
 import FastImage from 'react-native-fast-image';
 
-import Ripple from '@app/components/UI/Ripple';
+import Ripple from '@app/components/UI/Animations/Ripple';
 import StyledText from '@app/components/UI/StyledText';
 import colors from '@app/lib/colors';
 import theme from '@app/constants/theme';

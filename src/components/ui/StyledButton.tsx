@@ -11,7 +11,7 @@ import {
 import theme from '@app/constants/theme';
 
 import StyledText from './StyledText';
-import Ripple from './Ripple';
+import Ripple from './Animations/Ripple';
 
 type StyledButtonVariant = 'default' | 'outline' | 'disabled';
 

@@ -17,7 +17,7 @@ import HomePlantCard from '@app/components/Home/HomePlantCard';
 import HomeCategoryCard from '@app/components/Home/HomeCategoryCard';
 import StyledText from '@app/components/UI/StyledText';
 import Icon from '@app/components/Icon';
-import Ripple from '@app/components/UI/Ripple';
+import Ripple from '@app/components/UI/Animations/Ripple';
 import MailUpgrade from '@app/components/Icon/MailUpgrade';
 import colors from '@app/lib/colors';
 import ROUTES from '@app/constants/routes';
