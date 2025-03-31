@@ -10,7 +10,6 @@ declare global {
     MainTabs: NavigatorScreenParams<MainTabsParamList>;
     Paywall: undefined;
     Scan: undefined;
-    Chat: undefined;
   };
 
   type OnboardingStackParamList = {
