@@ -74,43 +74,48 @@ cd android
 
 - **Framework**: React Native v0.78.1
 - **Language**: TypeScript
-- **State Management**: Redux Toolkit with Redux Persist
+- **State Management**: Redux & Redux Toolkit with Redux Persist (react-redux, @reduxjs/toolkit)
+- **API Management**: RTK Query for data fetching and caching (@reduxjs/toolkit)
 - **Navigation**: React Navigation (Native Stack & Bottom Tabs)
 
 ### UI & Performance
 
-- **Styling**: React Native Size Matters
-- **Animations**: React Native Reanimated & Lottie
-- **Lists**: FlashList
-- **Images**: FastImage
+- **Styling**: react-native-size-matters
+- **Animations**: react-native-reanimated and lottie-react-native
+- **Lists**: @shopify/flash-list
+- **Images**: react-native-fast-image
 - **UI Components**:
-  - Bottom Sheet
-  - Linear Gradient
-  - Blur effects
-  - SVG support
+  - @gorhom/react-native-bottom-sheet
+  - react-native-linear-gradient
+  - @react-native-community/blur
+  - react-native-svg
+  - react-icomoon and svgps
 
 ### Development Tools
 
 - **Type Checking**: TypeScript
 - **Code Quality**: ESLint
 - **Code Formatting**: Prettier
-- **Git Hooks**: Husky
-- **Commit Linting**: Commitlint
-- **Testing**: Jest
-- **Environment Variables**: React Native Dotenv
+- **Git Hooks**: husky
+- **Commit Linting**: @commitlint/config-conventional with husky
+- **Testing**: Jest and React Native Testing Library
+- **Environment Variables**: react-native-dotenv
 
 ## Project Structure
 
 ```
+scripts/             # Custom scripts
+|
 src/
 ├── assets/          # Static assets (icons, images)
 ├── components/      # Reusable UI components
+├── constants/       # Constants (routes, theme, colors)
 ├── screens/         # Screen components
-├── navigation/      # Navigation configuration
-├── store/          # Redux store setup and slices
-├── hooks/          # Custom React hooks
-├── utils/          # Utility functions
-└── types/          # TypeScript type definitions
+├── navigation/      # Navigation stack and bottom tabs
+├── store/           # Redux store, slices and RTK Query
+├── hooks/           # Custom React hooks
+├── lib/             # Utility functions
+└── types/           # TypeScript type definitions
 ```
 
 ## Available Scripts
