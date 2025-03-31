@@ -66,7 +66,7 @@ This is one way to run your app — you can also build it directly from Android 
 
 Now that you have successfully run the app, let's make changes!
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
 
 When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
 
@@ -81,6 +81,47 @@ You've successfully run and modified your React Native App. :partying_face:
 
 - If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
 - If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+
+# Components
+
+## Icon Component
+
+This component provides a simple way to use SVG icons in the application with full TypeScript support.
+
+### Usage
+
+```tsx
+import Icon, {IconNames} from './components/Icon';
+
+// Use icon with type safety
+<Icon icon="herb" size={24} color="#00FF00" />;
+
+// All available icons can be found in IconNames object
+console.log(Object.keys(IconNames)); // ['herb', 'scan', 'speed-meter']
+```
+
+### Adding new icons
+
+1. Add your SVG icons to the `src/assets/icons` directory
+2. Run `yarn icon:generate` to:
+   - Generate the updated `icons.json` file
+   - Generate updated TypeScript definitions (`iconTypes.d.ts`)
+
+The `iconTypes.d.ts` file is auto-generated and provides type definitions for all available icons.
+
+### How it works
+
+This component uses the following tools:
+
+- `svgps-cli` to convert SVGs to a format usable by `react-icomoon`
+- A custom script `generateIconTypes.js` to extract icon names from the JSON file and generate TypeScript types
+- `react-icomoon` and `react-native-svg` for rendering the icons
+
+The whole process ensures you get:
+
+- Strong typing (autocomplete for icon names)
+- Runtime safety (object with all available icon names)
+- SVG optimization
 
 # Troubleshooting
 

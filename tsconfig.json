@@ -10,8 +10,9 @@
       "@app/constants/*": ["src/constants/*"],
       "@app/assets/*": ["src/assets/*"],
       "@app/hooks/*": ["src/hooks/*"],
-      "@app/styles/*": ["src/styles/*"]
+      "@app/styles/*": ["src/styles/*"],
+      "@app/lib/*": ["src/lib/*"]
     }
   },
-  "include": ["src/**/*", "src/types/*.d.ts"]
+  "include": ["src/**/*", "src/types/*.d.ts", "App.tsx", "scripts/*"]
 }

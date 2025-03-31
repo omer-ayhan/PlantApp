@@ -34,4 +34,4 @@ function goBack() {
   }
 }
 
-export {navigationRef, navigate, push, goBack};
+export default {navigationRef, navigate, push, goBack};
