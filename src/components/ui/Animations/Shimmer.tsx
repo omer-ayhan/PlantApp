@@ -19,6 +19,7 @@ import Animated, {
 import LinearGradient from 'react-native-linear-gradient';
 
 import colors from '@app/lib/colors';
+import theme from '@app/constants/theme';
 
 interface ShimmeringProps {
   colors?: Array<string>;
@@ -31,16 +32,15 @@ interface ShimmeringProps {
   duration?: number;
 }
 
-const SHIMMER_COLOR = 'rgb(234, 234, 234)';
 const DEFAULT_COLORS = [
-  SHIMMER_COLOR,
-  colors.hexToRgba('#fff', 0.4),
-  SHIMMER_COLOR,
+  theme.colors.shimmerColor,
+  colors.hexToRgba(theme.colors.white, 0.4),
+  theme.colors.shimmerColor,
 ];
 
 const ShimmerLoader: React.FC<ShimmeringProps> = ({
   colors = DEFAULT_COLORS,
-  backgroundColor = SHIMMER_COLOR,
+  backgroundColor = theme.colors.shimmerColor,
   gradientStyle,
   wrapperStyle,
   width = 80,
