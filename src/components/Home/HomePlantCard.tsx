@@ -20,40 +20,17 @@ type HomePlantCardProps = {
 
 const HomePlantCard = ({image, title, onPress}: HomePlantCardProps) => {
   return (
-    <Ripple
-      style={{
-        width: moderateScale(240),
-        height: moderateVerticalScale(165),
-        borderRadius: scale(12),
-        marginRight: scale(12),
-        overflow: 'hidden',
-      }}>
+    <Ripple style={styles.plantQuestionCard}>
       <Pressable onPress={onPress}>
         <FastImage
           source={{uri: image}}
           resizeMode="cover"
-          style={{
-            width: '100%',
-            height: '100%',
-            zIndex: -1,
-          }}
+          style={styles.plantQuestionImage}
         />
-        <View
-          style={{
-            width: '100%',
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            borderTopWidth: 1.5,
-            borderTopColor: colors.hexToRgba(theme.colors.white, 0.1),
-          }}>
+        <View style={styles.plantQuestionTextContainer}>
           <StyledText
             color={theme.colors.white}
-            style={{
-              margin: scale(12),
-              lineHeight: scale(18),
-            }}
+            style={styles.plantQuestionText}
             numberOfLines={2}
             size={moderateScale(15)}
             weight="medium">
@@ -62,17 +39,7 @@ const HomePlantCard = ({image, title, onPress}: HomePlantCardProps) => {
           <Image
             source={{uri: image}}
             resizeMode="cover"
-            style={[
-              StyleSheet.absoluteFillObject,
-              {
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                zIndex: -1,
-              },
-            ]}
+            style={[StyleSheet.absoluteFillObject, styles.bottomTextImage]}
             blurRadius={100}
           />
         </View>
@@ -82,3 +49,40 @@ const HomePlantCard = ({image, title, onPress}: HomePlantCardProps) => {
 };
 
 export default HomePlantCard;
+
+const styles = StyleSheet.create({
+  plantQuestionCard: {
+    width: moderateScale(240),
+    height: moderateVerticalScale(165),
+    borderRadius: scale(12),
+    marginRight: scale(12),
+    overflow: 'hidden',
+  },
+  plantQuestionImage: {
+    width: '100%',
+    height: '100%',
+    zIndex: -1,
+  },
+  plantQuestionTextContainer: {
+    width: '100%',
+    height: '40%',
+    position: 'absolute',
+    justifyContent: 'center',
+    bottom: 0,
+    left: 0,
+    borderTopWidth: 1.5,
+    borderTopColor: colors.hexToRgba(theme.colors.white, 0.1),
+  },
+  plantQuestionText: {
+    marginHorizontal: scale(12),
+    lineHeight: scale(18),
+  },
+  bottomTextImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: -1,
+  },
+});
