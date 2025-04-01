@@ -102,6 +102,11 @@ cd android
 - **Testing**: Jest and React Native Testing Library
 - **Environment Variables**: react-native-dotenv
 
+### Media & Storage
+
+- **Image Storage**: AWS S3 for secure and scalable image storage
+- **Content Delivery**: AWS CloudFront CDN for global content distribution and improved image loading performance
+
 ## Project Structure
 
 ```
