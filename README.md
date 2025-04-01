@@ -84,6 +84,7 @@ cd android
 - **Animations**: react-native-reanimated and lottie-react-native
 - **Lists**: @shopify/flash-list
 - **Images**: react-native-fast-image
+- **Camera**: react-native-vision-camera for camera functionality
 - **UI Components**:
   - @gorhom/react-native-bottom-sheet
   - react-native-linear-gradient
@@ -100,6 +101,11 @@ cd android
 - **Commit Linting**: @commitlint/config-conventional with husky
 - **Testing**: Jest and React Native Testing Library
 - **Environment Variables**: react-native-dotenv
+
+### Media & Storage
+
+- **Image Storage**: AWS S3 for secure and scalable image storage
+- **Content Delivery**: AWS CloudFront CDN for global content distribution and improved image loading performance
 
 ## Project Structure
 
