@@ -3,8 +3,8 @@ import {Pressable, StyleSheet} from 'react-native';
 import {scale} from 'react-native-size-matters';
 import FastImage from 'react-native-fast-image';
 
-import Ripple from '@app/components/UI/Animations/Ripple';
-import StyledText from '@app/components/UI/StyledText';
+import Ripple from '@app/components/ui/Animations/Ripple';
+import StyledText from '@app/components/ui/StyledText';
 import colors from '@app/lib/colors';
 import theme from '@app/constants/theme';
 import sizes from '@app/constants/sizes';

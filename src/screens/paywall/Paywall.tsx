@@ -15,12 +15,12 @@ import {BlurView} from '@react-native-community/blur';
 import {moderateVerticalScale, scale} from 'react-native-size-matters';
 import FastImage from 'react-native-fast-image';
 
-import Ripple from '@app/components/UI/Animations/Ripple';
+import Ripple from '@app/components/ui/Animations/Ripple';
 import Icon from '@app/components/Icon';
-import StyledButton from '@app/components/UI/StyledButton';
+import StyledButton from '@app/components/ui/StyledButton';
 import OfferButton from '@app/components/Paywall/OfferButton';
-import CustomSafeArea from '@app/components/UI/Layout/CustomSafeArea';
-import StyledText from '@app/components/UI/StyledText';
+import CustomSafeArea from '@app/components/ui/Layout/CustomSafeArea';
+import StyledText from '@app/components/ui/StyledText';
 import useAppNavigation from '@app/hooks/useAppNavigation';
 import useOnboarding from '@app/hooks/redux/useOnboarding';
 import colors from '@app/lib/colors';
