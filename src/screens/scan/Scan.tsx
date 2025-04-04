@@ -23,9 +23,9 @@ import {scale} from 'react-native-size-matters';
 import FastImage from 'react-native-fast-image';
 import LottieView from 'lottie-react-native';
 
-import StyledText from '@app/components/UI/StyledText';
-import Ripple from '@app/components/UI/Animations/Ripple';
-import StyledButton from '@app/components/UI/StyledButton';
+import StyledText from '@app/components/ui/StyledText';
+import Ripple from '@app/components/ui/Animations/Ripple';
+import StyledButton from '@app/components/ui/StyledButton';
 import ScanFrame from '@app/components/Icon/ScanFrame';
 import Icon from '@app/components/Icon';
 import useAppNavigation from '@app/hooks/useAppNavigation';

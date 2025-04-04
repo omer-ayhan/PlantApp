@@ -20,11 +20,11 @@ import FastImage from 'react-native-fast-image';
 
 import HomePlantCard from '@app/components/Home/HomePlantCard';
 import HomeCategoryCard from '@app/components/Home/HomeCategoryCard';
-import StyledText from '@app/components/UI/StyledText';
+import StyledText from '@app/components/ui/StyledText';
 import Icon from '@app/components/Icon';
-import Ripple from '@app/components/UI/Animations/Ripple';
+import Ripple from '@app/components/ui/Animations/Ripple';
 import MailUpgrade from '@app/components/Icon/MailUpgrade';
-import ShimmerLoader from '@app/components/UI/Animations/Shimmer';
+import ShimmerLoader from '@app/components/ui/Animations/Shimmer';
 import useAppNavigation from '@app/hooks/useAppNavigation';
 import plantsApi from '@app/store/api/plantsApi';
 import colors from '@app/lib/colors';

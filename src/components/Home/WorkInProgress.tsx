@@ -4,7 +4,7 @@ import {View, StyleSheet} from 'react-native';
 import {moderateScale, scale} from 'react-native-size-matters';
 import LottieView from 'lottie-react-native';
 
-import StyledText from '@app/components/UI/StyledText';
+import StyledText from '@app/components/ui/StyledText';
 
 const WorkInProgress = () => {
   return (
